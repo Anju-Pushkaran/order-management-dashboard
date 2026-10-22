@@ -15,7 +15,7 @@ public class OrderService : IOrderService
 
     private readonly IOrderRepository _repository;
 
-    private OrderService(IOrderRepository repository)
+    public OrderService(IOrderRepository repository)
     {
         _repository = repository;
     }

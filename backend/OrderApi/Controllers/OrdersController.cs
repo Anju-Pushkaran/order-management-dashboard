@@ -10,7 +10,7 @@ public class OrdersController : ControllerBase
 {
     private readonly IOrderService _orderService;
 
-    private OrdersController(IOrderService orderService)
+    public OrdersController(IOrderService orderService)
     {
         _orderService = orderService;
     }

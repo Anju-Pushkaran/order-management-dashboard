@@ -15,7 +15,7 @@ public class UpdateStatusResult
     public Order? Order { get; }
     public string? ErrorMessage { get; }
 
-    public UpdateStatusResult(UpdateStatusOutcome outcome, Order? order, string? errorMessage)
+    private UpdateStatusResult(UpdateStatusOutcome outcome, Order? order, string? errorMessage)
 	{
         Outcome = outcome;
         Order = order;
