@@ -6,6 +6,7 @@ import SearchFilterBar from "./components/SearchFilterBar";
 import { filterOrders, type StatusFilter } from "./utils/filterOrders";
 import OrderDetailsModal from "./components/OrderDetailsModal";
 import SummaryCards from "./components/SummaryCards";
+import "./App.css";
 
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -39,9 +40,11 @@ function App() {
   }
 
   return (
-    <main>
-      <h1>Order Management Dashboard</h1>
-      <p>Veterinary Purchasing – customer orders</p>
+    <main className="app">
+      <header className="app-header">
+        <h1>Order Management Dashboard</h1>
+        <p className="app-subtitle">Veterinary Purchasing – customer orders</p>
+      </header>
 
       {isLoading && <p>Loading orders...</p>}
 
@@ -56,7 +59,7 @@ function App() {
             onSearchChange={setSearchText}
             onStatusChange={setStatusFilter}
           />
-          <p>
+          <p className="result-count">
             Showing {filteredOrders.length} of {orders.length} orders
           </p>
           <OrderTable

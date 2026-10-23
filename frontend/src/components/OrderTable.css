@@ -1,5 +1,8 @@
 .table-wrapper {
   overflow-x: auto;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
 }
 
 .order-table {
@@ -12,6 +15,7 @@
   padding: 10px 12px;
   text-align: left;
   border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
 }
 
 .order-table th {

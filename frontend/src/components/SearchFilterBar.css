@@ -19,4 +19,16 @@
   font-size: 1rem;
   border: 1px solid #d1d5db;
   border-radius: 6px;
+  background-color: #ffffff;
+}
+@media (max-width: 600px) {
+  .field {
+    flex: 1 1 100%;
+  }
+
+  .field input,
+  .field select {
+    min-width: 0;
+    width: 100%;
+  }
 }
