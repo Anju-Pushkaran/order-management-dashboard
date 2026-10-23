@@ -5,6 +5,7 @@ import type { Order } from "./types/order";
 import SearchFilterBar from "./components/SearchFilterBar";
 import { filterOrders, type StatusFilter } from "./utils/filterOrders";
 import OrderDetailsModal from "./components/OrderDetailsModal";
+import SummaryCards from "./components/SummaryCards";
 
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -48,6 +49,7 @@ function App() {
 
       {!isLoading && !error && (
         <>
+          <SummaryCards orders={orders} />
           <SearchFilterBar
             searchText={searchText}
             statusFilter={statusFilter}

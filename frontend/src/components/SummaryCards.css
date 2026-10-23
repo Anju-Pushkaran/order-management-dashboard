@@ -1,0 +1,45 @@
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-left-width: 6px;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.summary-count {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.summary-label {
+  color: #4b5563;
+}
+
+.summary-total {
+  border-left-color: #374151;
+}
+
+.summary-pending {
+  border-left-color: #f59e0b;
+}
+
+.summary-processing {
+  border-left-color: #3b82f6;
+}
+
+.summary-completed {
+  border-left-color: #22c55e;
+}
+
+.summary-cancelled {
+  border-left-color: #ef4444;
+}
