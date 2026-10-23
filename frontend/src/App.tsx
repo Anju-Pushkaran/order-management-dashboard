@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getOrders } from "./api/ordersApi";
-import StatusBadge from "./components/StatusBadge";
+import OrderTable from "./components/OrderTable";
 import type { Order } from "./types/order";
 
 function App() {
@@ -32,16 +32,7 @@ function App() {
 
       {error && <p role="alert">{error}</p>}
 
-      {!isLoading && !error && <p>{orders.length} orders loaded.</p>}
-
-      <ul>
-        {orders.map((order) => (
-          <li key={order.id}>
-            {order.id} – {order.customerName} –{" "}
-            <StatusBadge status={order.status} /> – {order.total}
-          </li>
-        ))}
-      </ul>
+      {!isLoading && !error && <OrderTable orders={orders} />}
     </main>
   );
 }
