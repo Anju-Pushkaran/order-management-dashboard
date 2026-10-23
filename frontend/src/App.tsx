@@ -29,6 +29,13 @@ function App() {
 
     loadOrders();
   }, []);
+  function handleOrderUpdated(updatedOrder: Order) {
+    setOrders((currentOrders) =>
+      currentOrders.map((order) =>
+        order.id === updatedOrder.id ? updatedOrder : order,
+      ),
+    );
+  }
 
   return (
     <main>
@@ -61,6 +68,7 @@ function App() {
           key={selectedOrderId}
           orderId={selectedOrderId}
           onClose={() => setSelectedOrderId(null)}
+          onOrderUpdated={handleOrderUpdated}
         />
       )}
     </main>

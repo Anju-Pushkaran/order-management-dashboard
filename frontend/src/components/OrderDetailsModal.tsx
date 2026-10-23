@@ -3,14 +3,20 @@ import { getOrderById } from "../api/ordersApi";
 import type { Order } from "../types/order";
 import { formatCurrency, formatDate } from "../utils/format";
 import StatusBadge from "./StatusBadge";
+import StatusUpdateForm from "./StatusUpdateForm";
 import "./OrderDetailsModal.css";
 
 interface OrderDetailsModalProps {
   orderId: string;
   onClose: () => void;
+  onOrderUpdated: (updatedOrder: Order) => void;
 }
 
-function OrderDetailsModal({ orderId, onClose }: OrderDetailsModalProps) {
+function OrderDetailsModal({
+  orderId,
+  onClose,
+  onOrderUpdated,
+}: OrderDetailsModalProps) {
   const [order, setOrder] = useState<Order | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,6 +49,11 @@ function OrderDetailsModal({ orderId, onClose }: OrderDetailsModalProps) {
       ignore = true;
     };
   }, [orderId]);
+
+  function handleStatusUpdated(updatedOrder: Order) {
+    setOrder(updatedOrder);
+    onOrderUpdated(updatedOrder);
+  }
 
   return (
     <div className="modal-backdrop">
@@ -116,6 +127,11 @@ function OrderDetailsModal({ orderId, onClose }: OrderDetailsModalProps) {
                 </tfoot>
               </table>
             </div>
+
+            <StatusUpdateForm
+              order={order}
+              onStatusUpdated={handleStatusUpdated}
+            />
           </>
         )}
       </div>
