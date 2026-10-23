@@ -6,6 +6,7 @@ import SearchFilterBar from "./components/SearchFilterBar";
 import { filterOrders, type StatusFilter } from "./utils/filterOrders";
 import OrderDetailsModal from "./components/OrderDetailsModal";
 import SummaryCards from "./components/SummaryCards";
+import { sortOrders, type SortOption } from "./utils/sortOrders";
 import "./App.css";
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const filteredOrders = filterOrders(orders, searchText, statusFilter);
+  const [sortOption, setSortOption] = useState<SortOption>("date-desc");
+  const visibleOrders = sortOrders(filteredOrders, sortOption);
 
   useEffect(() => {
     async function loadOrders() {
@@ -58,12 +61,14 @@ function App() {
             statusFilter={statusFilter}
             onSearchChange={setSearchText}
             onStatusChange={setStatusFilter}
+            sortOption={sortOption}
+            onSortChange={setSortOption}
           />
           <p className="result-count">
             Showing {filteredOrders.length} of {orders.length} orders
           </p>
           <OrderTable
-            orders={filteredOrders}
+            orders={visibleOrders}
             onViewDetails={setSelectedOrderId}
           />
         </>
