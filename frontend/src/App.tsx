@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getOrders } from "./api/ordersApi";
+import StatusBadge from "./components/StatusBadge";
 import type { Order } from "./types/order";
 
 function App() {
@@ -36,7 +37,8 @@ function App() {
       <ul>
         {orders.map((order) => (
           <li key={order.id}>
-            {order.id} – {order.customerName} – {order.status} – {order.total}
+            {order.id} – {order.customerName} –{" "}
+            <StatusBadge status={order.status} /> – {order.total}
           </li>
         ))}
       </ul>
