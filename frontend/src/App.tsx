@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import { getOrders } from "./api/ordersApi";
 import OrderTable from "./components/OrderTable";
 import type { Order } from "./types/order";
+import SearchFilterBar from "./components/SearchFilterBar";
+import { filterOrders, type StatusFilter } from "./utils/filterOrders";
 
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchText, setSearchText] = useState("");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
+  const filteredOrders = filterOrders(orders, searchText, statusFilter);
 
   useEffect(() => {
     async function loadOrders() {
@@ -32,7 +37,20 @@ function App() {
 
       {error && <p role="alert">{error}</p>}
 
-      {!isLoading && !error && <OrderTable orders={orders} />}
+      {!isLoading && !error && (
+        <>
+          <SearchFilterBar
+            searchText={searchText}
+            statusFilter={statusFilter}
+            onSearchChange={setSearchText}
+            onStatusChange={setStatusFilter}
+          />
+          <p>
+            Showing {filteredOrders.length} of {orders.length} orders
+          </p>
+          <OrderTable orders={filteredOrders} />
+        </>
+      )}
     </main>
   );
 }
