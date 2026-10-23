@@ -4,6 +4,7 @@ import OrderTable from "./components/OrderTable";
 import type { Order } from "./types/order";
 import SearchFilterBar from "./components/SearchFilterBar";
 import { filterOrders, type StatusFilter } from "./utils/filterOrders";
+import OrderDetailsModal from "./components/OrderDetailsModal";
 
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -11,6 +12,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
+  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const filteredOrders = filterOrders(orders, searchText, statusFilter);
 
   useEffect(() => {
@@ -48,8 +50,18 @@ function App() {
           <p>
             Showing {filteredOrders.length} of {orders.length} orders
           </p>
-          <OrderTable orders={filteredOrders} />
+          <OrderTable
+            orders={filteredOrders}
+            onViewDetails={setSelectedOrderId}
+          />
         </>
+      )}
+      {selectedOrderId && (
+        <OrderDetailsModal
+          key={selectedOrderId}
+          orderId={selectedOrderId}
+          onClose={() => setSelectedOrderId(null)}
+        />
       )}
     </main>
   );
